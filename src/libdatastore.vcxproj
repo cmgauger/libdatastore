@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="sqlite3.c" />
+    <ClCompile Include="unqlite.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\sqlite3.h" />
+    <ClInclude Include="..\include\sqlite3ext.h" />
+    <ClInclude Include="..\include\unqlite.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{0AE8660E-C717-48C3-BE66-2DEFA63A0978}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>libdatastore</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)lib\$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IntDir>$(SolutionDir)build\$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>$(SolutionDir)include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)lib\$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IntDir>$(SolutionDir)build\$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>$(SolutionDir)include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)lib\$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IntDir>$(SolutionDir)build\$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>$(SolutionDir)include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)lib\$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IntDir>$(SolutionDir)build\$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>$(SolutionDir)include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;UNQLITE_ENABLE_THREADS;SQLITE_DEFAULT_AUTOMATIC_INDEX=1;SQLITE_DEFAULT_AUTOVACUUM=2;SQLITE_DEFAULT_FOREIGN_KEYS=1;SQLITE_DEFAULT_MEMSTATUS=1;SQLITE_DEFAULT_SYNCHRONOUS=3;SQLITE_DEFAULT_WORKER_THREADS=5;SQLITE_DQS=0;SQLITE_ENABLE_API_ARMOR;SQLITE_ENABLE_BYTECODE_VTAB;SQLITE_ENABLE_CARRAY;SQLITE_ENABLE_COLUMN_METADATA;SQLITE_ENABLE_DBPAGE_VTAB;SQLITE_ENABLE_DBSTAT_VTAB;SQLITE_ENABLE_EXPLAIN_COMMENTS;SQLITE_ENABLE_FTS3_PARENTHESIS;SQLITE_ENABLE_FTS3_TOKENIZER;SQLITE_ENABLE_FTS4;SQLITE_ENABLE_FTS5;SQLITE_ENABLE_GEOPOLY;SQLITE_ENABLE_HIDDEN_COLUMNS;SQLITE_ENABLE_IOTRACE;SQLITE_ENABLE_MATH_FUNCTIONS;SQLITE_ENABLE_MEMORY_MANAGEMENT;SQLITE_ENABLE_NORMALIZE;SQLITE_ENABLE_NULL_TRIM;SQLITE_ENABLE_OFFSET_SQL_FUNC;SQLITE_ENABLE_ORDERED_SET_AGGREGATES;SQLITE_ENABLE_PERCENTILE;SQLITE_ENABLE_PREUPDATE_HOOK;SQLITE_ENABLE_RBU;SQLITE_ENABLE_RTREE;SQLITE_ENABLE_SESSION;SQLITE_ENABLE_SNAPSHOT;SQLITE_ENABLE_SORTER_REFERENCES;SQLITE_ENABLE_STAT4;SQLITE_ENABLE_STMT_SCANSTATUS;SQLITE_ENABLE_STMTVTAB;SQLITE_ENABLE_UNKNOWN_SQL_FUNCTION;SQLITE_ENABLE_UNLOCK_NOTIFY;SQLITE_LIKE_DOESNT_MATCH_BLOBS;SQLITE_MAX_WORKER_THREADS=50;SQLITE_OMIT_DEPRECATED;SQLITE_OMIT_LOAD_EXTENSION;SQLITE_SOUNDEX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>
+      </PrecompiledHeaderOutputFile>
+      <OmitFramePointers>false</OmitFramePointers>
+      <CompileAs>CompileAsC</CompileAs>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;UNQLITE_ENABLE_THREADS;SQLITE_DEFAULT_AUTOMATIC_INDEX=1;SQLITE_DEFAULT_AUTOVACUUM=2;SQLITE_DEFAULT_FOREIGN_KEYS=1;SQLITE_DEFAULT_MEMSTATUS=1;SQLITE_DEFAULT_SYNCHRONOUS=3;SQLITE_DEFAULT_WORKER_THREADS=5;SQLITE_DQS=0;SQLITE_ENABLE_API_ARMOR;SQLITE_ENABLE_BYTECODE_VTAB;SQLITE_ENABLE_CARRAY;SQLITE_ENABLE_COLUMN_METADATA;SQLITE_ENABLE_DBPAGE_VTAB;SQLITE_ENABLE_DBSTAT_VTAB;SQLITE_ENABLE_EXPLAIN_COMMENTS;SQLITE_ENABLE_FTS3_PARENTHESIS;SQLITE_ENABLE_FTS3_TOKENIZER;SQLITE_ENABLE_FTS4;SQLITE_ENABLE_FTS5;SQLITE_ENABLE_GEOPOLY;SQLITE_ENABLE_HIDDEN_COLUMNS;SQLITE_ENABLE_IOTRACE;SQLITE_ENABLE_MATH_FUNCTIONS;SQLITE_ENABLE_MEMORY_MANAGEMENT;SQLITE_ENABLE_NORMALIZE;SQLITE_ENABLE_NULL_TRIM;SQLITE_ENABLE_OFFSET_SQL_FUNC;SQLITE_ENABLE_ORDERED_SET_AGGREGATES;SQLITE_ENABLE_PERCENTILE;SQLITE_ENABLE_PREUPDATE_HOOK;SQLITE_ENABLE_RBU;SQLITE_ENABLE_RTREE;SQLITE_ENABLE_SESSION;SQLITE_ENABLE_SNAPSHOT;SQLITE_ENABLE_SORTER_REFERENCES;SQLITE_ENABLE_STAT4;SQLITE_ENABLE_STMT_SCANSTATUS;SQLITE_ENABLE_STMTVTAB;SQLITE_ENABLE_UNKNOWN_SQL_FUNCTION;SQLITE_ENABLE_UNLOCK_NOTIFY;SQLITE_LIKE_DOESNT_MATCH_BLOBS;SQLITE_MAX_WORKER_THREADS=50;SQLITE_OMIT_DEPRECATED;SQLITE_OMIT_LOAD_EXTENSION;SQLITE_SOUNDEX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>
+      </PrecompiledHeaderOutputFile>
+      <OmitFramePointers>false</OmitFramePointers>
+      <CompileAs>CompileAsC</CompileAs>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;UNQLITE_ENABLE_THREADS;SQLITE_DEFAULT_AUTOMATIC_INDEX=1;SQLITE_DEFAULT_AUTOVACUUM=2;SQLITE_DEFAULT_FOREIGN_KEYS=1;SQLITE_DEFAULT_MEMSTATUS=1;SQLITE_DEFAULT_SYNCHRONOUS=3;SQLITE_DEFAULT_WORKER_THREADS=5;SQLITE_DQS=0;SQLITE_ENABLE_API_ARMOR;SQLITE_ENABLE_BYTECODE_VTAB;SQLITE_ENABLE_CARRAY;SQLITE_ENABLE_COLUMN_METADATA;SQLITE_ENABLE_DBPAGE_VTAB;SQLITE_ENABLE_DBSTAT_VTAB;SQLITE_ENABLE_EXPLAIN_COMMENTS;SQLITE_ENABLE_FTS3_PARENTHESIS;SQLITE_ENABLE_FTS3_TOKENIZER;SQLITE_ENABLE_FTS4;SQLITE_ENABLE_FTS5;SQLITE_ENABLE_GEOPOLY;SQLITE_ENABLE_HIDDEN_COLUMNS;SQLITE_ENABLE_IOTRACE;SQLITE_ENABLE_MATH_FUNCTIONS;SQLITE_ENABLE_MEMORY_MANAGEMENT;SQLITE_ENABLE_NORMALIZE;SQLITE_ENABLE_NULL_TRIM;SQLITE_ENABLE_OFFSET_SQL_FUNC;SQLITE_ENABLE_ORDERED_SET_AGGREGATES;SQLITE_ENABLE_PERCENTILE;SQLITE_ENABLE_PREUPDATE_HOOK;SQLITE_ENABLE_RBU;SQLITE_ENABLE_RTREE;SQLITE_ENABLE_SESSION;SQLITE_ENABLE_SNAPSHOT;SQLITE_ENABLE_SORTER_REFERENCES;SQLITE_ENABLE_STAT4;SQLITE_ENABLE_STMT_SCANSTATUS;SQLITE_ENABLE_STMTVTAB;SQLITE_ENABLE_UNKNOWN_SQL_FUNCTION;SQLITE_ENABLE_UNLOCK_NOTIFY;SQLITE_LIKE_DOESNT_MATCH_BLOBS;SQLITE_MAX_WORKER_THREADS=50;SQLITE_OMIT_DEPRECATED;SQLITE_OMIT_LOAD_EXTENSION;SQLITE_SOUNDEX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>
+      </PrecompiledHeaderOutputFile>
+      <OmitFramePointers>false</OmitFramePointers>
+      <CompileAs>CompileAsC</CompileAs>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;UNQLITE_ENABLE_THREADS;SQLITE_DEFAULT_AUTOMATIC_INDEX=1;SQLITE_DEFAULT_AUTOVACUUM=2;SQLITE_DEFAULT_FOREIGN_KEYS=1;SQLITE_DEFAULT_MEMSTATUS=1;SQLITE_DEFAULT_SYNCHRONOUS=3;SQLITE_DEFAULT_WORKER_THREADS=5;SQLITE_DQS=0;SQLITE_ENABLE_API_ARMOR;SQLITE_ENABLE_BYTECODE_VTAB;SQLITE_ENABLE_CARRAY;SQLITE_ENABLE_COLUMN_METADATA;SQLITE_ENABLE_DBPAGE_VTAB;SQLITE_ENABLE_DBSTAT_VTAB;SQLITE_ENABLE_EXPLAIN_COMMENTS;SQLITE_ENABLE_FTS3_PARENTHESIS;SQLITE_ENABLE_FTS3_TOKENIZER;SQLITE_ENABLE_FTS4;SQLITE_ENABLE_FTS5;SQLITE_ENABLE_GEOPOLY;SQLITE_ENABLE_HIDDEN_COLUMNS;SQLITE_ENABLE_IOTRACE;SQLITE_ENABLE_MATH_FUNCTIONS;SQLITE_ENABLE_MEMORY_MANAGEMENT;SQLITE_ENABLE_NORMALIZE;SQLITE_ENABLE_NULL_TRIM;SQLITE_ENABLE_OFFSET_SQL_FUNC;SQLITE_ENABLE_ORDERED_SET_AGGREGATES;SQLITE_ENABLE_PERCENTILE;SQLITE_ENABLE_PREUPDATE_HOOK;SQLITE_ENABLE_RBU;SQLITE_ENABLE_RTREE;SQLITE_ENABLE_SESSION;SQLITE_ENABLE_SNAPSHOT;SQLITE_ENABLE_SORTER_REFERENCES;SQLITE_ENABLE_STAT4;SQLITE_ENABLE_STMT_SCANSTATUS;SQLITE_ENABLE_STMTVTAB;SQLITE_ENABLE_UNKNOWN_SQL_FUNCTION;SQLITE_ENABLE_UNLOCK_NOTIFY;SQLITE_LIKE_DOESNT_MATCH_BLOBS;SQLITE_MAX_WORKER_THREADS=50;SQLITE_OMIT_DEPRECATED;SQLITE_OMIT_LOAD_EXTENSION;SQLITE_SOUNDEX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>
+      </PrecompiledHeaderOutputFile>
+      <OmitFramePointers>false</OmitFramePointers>
+      <CompileAs>CompileAsC</CompileAs>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
