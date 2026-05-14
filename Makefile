@@ -27,7 +27,7 @@
 
 # Project-wide settings
 debug ?= 0
-icu ?= 1
+icu ?= 0
 NAME := libdatastore
 BUILD_DIR := build
 INCLUDE_DIR := include
@@ -37,7 +37,7 @@ SRC_DIR := src
 vpath %.c $(SRC_DIR)
 
 # object file paths
-OBJS := $(addprefix $(BUILD_DIR)/, $(patsubst %.c,%.o,$(notdir $(wildcard $(SRC_DIR)/*.c))))
+OBJS := $(addprefix $(BUILD_DIR)/, $(patsubst %.c, %.o, $(notdir $(wildcard $(SRC_DIR)/*.c))))
 
 # Compilers & Utilities
 CC := gcc
@@ -49,7 +49,7 @@ RM := rm -rf
 #     -std=c99: use ISO C99 standard
 #     -fPIC: compile as position-independent code
 #   CPPFLAGS
-#     -D_GNU_SOURCE:
+#     -D_GNU_SOURCE: allow for GNU extensions to the code
 #     -DUNQLITE_ENABLE_THREADS: enable multi-threading code in UnQlite
 #     -DSQLITE_ALLOW_COVERING_INDEX_SCAN=1: uses covering indicies for full
 #         table scans
@@ -134,7 +134,7 @@ RM := rm -rf
 #         default; the equivalent to issuing the 'SQLITE_CONFIG_MULTITHREAD' to
 #         sqlite3_config()
 #   ARFLAGS
-#     rcs
+#     rcs: create the library and its symbol table, all in one go
 CFLAGS := -std=c99 -fPIC
 CPPFLAGS := -I$(INCLUDE_DIR)/ -D_GNU_SOURCE \
 	-DUNQLITE_ENABLE_THREADS -DSQLITE_ALLOW_COVERING_INDEX_SCAN=1 \
@@ -201,7 +201,7 @@ clean:
 
 $(LIB_DIR) : ; mkdir -p $(LIB_DIR)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) | $(LIB_DIR)
 	$(AR) $(ARFLAGS) $(patsubst %.o,$(LIB_DIR)/%.a,$(notdir $<)) $<
 
 $(BUILD_DIR) : ; mkdir -p $(BUILD_DIR)
