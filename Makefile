@@ -34,8 +34,10 @@ INCLUDE_DIR := include
 LIB_DIR := lib
 SRC_DIR := src
 
+vpath %.c $(SRC_DIR)
+
 # object file paths
-OBJS := $(patsubst %.c,%.o,$(wildcard $(SRC_DIR)/*.c))
+OBJS := $(addprefix $(BUILD_DIR)/, $(patsubst %.c,%.o,$(notdir $(wildcard $(SRC_DIR)/*.c))))
 
 # Compilers & Utilities
 CC := gcc
@@ -45,9 +47,9 @@ RM := rm -rf
 # General flag settings
 #   CFLAGS
 #     -std=c99: use ISO C99 standard
-#     -fPIC: compile as position-indepdent code
+#     -fPIC: compile as position-independent code
 #   CPPFLAGS
-#     -D_GNU_SOURCE: 
+#     -D_GNU_SOURCE:
 #     -DUNQLITE_ENABLE_THREADS: enable multi-threading code in UnQlite
 #     -DSQLITE_ALLOW_COVERING_INDEX_SCAN=1: uses covering indicies for full
 #         table scans
@@ -66,7 +68,7 @@ RM := rm -rf
 #     -DSQLITE_DIRECT_OVERFLOW_READ: causes content contained in overflow pages
 #         to be read directly from disk, bypassing the page cache for enhanced
 #         performance of read transactions
-#     -DSQLITE_DQS=0: disallows doubly-quoted strings in all contexts 
+#     -DSQLITE_DQS=0: disallows doubly-quoted strings in all contexts
 #     -DSQLITE_ENABLE_API_ARMOR: activates code to attempt to detect misuse of
 #         the SQLite API
 #     -DSQLITE_ENABLE_BYTECODE_VTAB: enables the 'bytecode' and 'tables_used'
@@ -124,7 +126,7 @@ RM := rm -rf
 #     -DSQLITE_SECURE_DELETE: securely deletes (by overwiting with zeroes)
 #         content which has been deleted from the database
 #     -DSQLITE_SOUNDEX: enables the soundex() SQL function
-#     -DSQLITE_STRICT_SUBTYPE=1: 
+#     -DSQLITE_STRICT_SUBTYPE=1:
 #     -DSQLITE_TEMP_STORE=2: enables storing temporary files to memory by
 #         default, with the option to change the default using the 'temp_store'
 #         command pragma
@@ -176,7 +178,7 @@ endif
 #   CPPFLAGS
 #     -DSQLITE_ENABLE_STMT_SCANSTATUS: enables the statement scan status
 #         interfaces
-#     -DDEBUG: 
+#     -DDEBUG:
 #
 #     Release Builds
 #     ==============
@@ -189,7 +191,7 @@ else
 	CFLAGS += -Ofast
 endif
 
-.PHONY: clean dir
+.PHONY: all clean dir
 
 all: $(NAME)
 
@@ -197,14 +199,13 @@ clean:
 	$(RM) $(BUILD_DIR)
 	$(RM) $(LIB_DIR)
 
-dir:
-	mkdir -p $(BUILD_DIR)
-	mkdir -p $(LIB_DIR)
+$(LIB_DIR) : ; mkdir -p $(LIB_DIR)
 
-$(NAME): dir $(OBJS)
-	$(AR) $(ARFLAGS) $(patsubst %,$(LIB_DIR)/%.a,$@) \
-	$(patsubst %,build/%,$(OBJS))
+$(NAME): $(OBJS)
+	$(AR) $(ARFLAGS) $(patsubst %.o,$(LIB_DIR)/%.a,$(notdir $<)) $<
 
-$(OBJS): dir
-	mkdir -p $(BUILD_DIR)/$(@D)
-	$(CC) $*.c $(CPPFLAGS) $(CFLAGS) -c -o $(BUILD_DIR)/$@
+$(BUILD_DIR) : ; mkdir -p $(BUILD_DIR)
+
+$(BUILD_DIR)/%.o : %.c | $(BUILD_DIR)
+	$(CC) -o $@ -c $< $(CPPFLAGS) $(CFLAGS)
+
