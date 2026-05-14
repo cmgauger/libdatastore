@@ -37,7 +37,8 @@ SRC_DIR := src
 vpath %.c $(SRC_DIR)
 
 # object file paths
-OBJS := $(addprefix $(BUILD_DIR)/, $(patsubst %.c, %.o, $(notdir $(wildcard $(SRC_DIR)/*.c))))
+OBJS := $(addprefix $(BUILD_DIR)/, $(patsubst %.c, %.o, \
+	$(notdir $(wildcard $(SRC_DIR)/*.c))))
 
 # Compilers & Utilities
 CC := gcc
@@ -195,7 +196,7 @@ else
 	CFLAGS += -Ofast
 endif
 
-.PHONY: all clean dir
+.PHONY: all clean
 
 all: $(NAME)
 
@@ -205,11 +206,10 @@ clean:
 
 $(LIB_DIR) : ; mkdir -p $(LIB_DIR)
 
-$(NAME): $(OBJS) | $(LIB_DIR)
-	$(AR) $(ARFLAGS) $(patsubst %.o,$(LIB_DIR)/%.a,$(notdir $<)) $<
-
 $(BUILD_DIR) : ; mkdir -p $(BUILD_DIR)
+
+$(NAME): $(OBJS) | $(LIB_DIR)
+	$(AR) $(ARFLAGS) $(addprefix $(LIB_DIR)/, $(addsuffix .a, $@)) $^
 
 $(BUILD_DIR)/%.o : %.c | $(BUILD_DIR)
 	$(CC) -o $@ -c $< $(CPPFLAGS) $(CFLAGS)
-
