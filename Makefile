@@ -49,8 +49,11 @@ RM := rm -rf
 #     -std=c99: use ISO C99 standard
 #     -fPIC: compile as position-independent code
 #   CPPFLAGS
+#     -D_LIB
 #     -D_GNU_SOURCE: allow for GNU extensions to the code
 #     -DUNQLITE_ENABLE_THREADS: enable multi-threading code in UnQlite
+#     -DUNQLITE_ENABLE_JX9_HASH_IO: built-in hash functions for Jx9 are enabled
+#     -DJX9_ENABLE_MATH_FUNC: built-in math functions for Jx9 are enabled
 #     -DSQLITE_ALLOW_COVERING_INDEX_SCAN=1: uses covering indicies for full
 #         table scans
 #     -DSQLITE_DEFAULT_AUTOMATIC_INDEX=1: enable automatic indexing of tables
@@ -136,8 +139,9 @@ RM := rm -rf
 #   ARFLAGS
 #     rcs: create the library and its symbol table, all in one go
 CFLAGS := -std=c99 -fPIC
-CPPFLAGS := -I$(INCLUDE_DIR)/ -D_GNU_SOURCE \
-	-DUNQLITE_ENABLE_THREADS -DSQLITE_ALLOW_COVERING_INDEX_SCAN=1 \
+CPPFLAGS := -I$(INCLUDE_DIR)/ -D_LIB -D_GNU_SOURCE \
+	-DUNQLITE_ENABLE_THREADS -DUNQLITE_ENABLE_JX9_HASH_IO \
+	-DJX9_ENABLE_MATH_FUNC -DSQLITE_ALLOW_COVERING_INDEX_SCAN=1 \
 	-DSQLITE_DEFAULT_AUTOMATIC_INDEX=1 -DSQLITE_DEFAULT_AUTOVACUUM=2 \
 	-DSQLITE_DEFAULT_FOREIGN_KEYS=1 -DSQLITE_DEFAULT_MEMSTATUS=1 \
 	-DSQLITE_DEFAULT_SYNCHRONOUS=3 -DSQLITE_DEFAULT_WORKER_THREADS=5 \
@@ -157,8 +161,8 @@ CPPFLAGS := -I$(INCLUDE_DIR)/ -D_GNU_SOURCE \
 	-DSQLITE_ENABLE_UNKNOWN_SQL_FUNCTION -DSQLITE_ENABLE_UNLOCK_NOTIFY \
 	-DSQLITE_LIKE_DOESNT_MATCH_BLOBS -DSQLITE_MAX_WORKER_THREADS=50 \
 	-DSQLITE_OMIT_DEPRECATED -DSQLITE_OMIT_LOAD_EXTENSION \
-	-DSQLITE_SECURE_DELETE -DSQLITE_SOUNDEX -DSQLITE_STRICT_SUBTYPE=1
--DSQLITE_TEMP_STORE=2 -DSQLITE_THREADSAFE=2
+	-DSQLITE_SECURE_DELETE -DSQLITE_SOUNDEX -DSQLITE_STRICT_SUBTYPE=1 \
+	-DSQLITE_TEMP_STORE=2 -DSQLITE_THREADSAFE=2
 ARFLAGS := rcs
 
 # ICU libraries (if we have them)
@@ -178,7 +182,7 @@ endif
 #   CPPFLAGS
 #     -DSQLITE_ENABLE_STMT_SCANSTATUS: enables the statement scan status
 #         interfaces
-#     -DDEBUG:
+#     -D_DEBUG
 #
 #     Release Builds
 #     ==============
@@ -186,7 +190,7 @@ endif
 #     -Ofast: optimize for speed
 ifeq ($(debug), 1)
 	CFLAGS += -g -O0
-	CPPFLAGS += -DSQLITE_ENABLE_STMT_SCANSTATUS -DDEBUG
+	CPPFLAGS += -DSQLITE_ENABLE_STMT_SCANSTATUS -D_DEBUG
 else
 	CFLAGS += -Ofast
 endif
